@@ -1,0 +1,276 @@
+/* ============================================================
+   Astra — deep-space theme
+   Palette: near-black void, indigo nebulae, cyan/violet accents
+   ============================================================ */
+
+:root {
+    --void:        #05060f;
+    --void-2:      #0a0c1a;
+    --nebula-1:    #3b1d6e;
+    --nebula-2:    #0e2a5c;
+    --accent:      #7ee2ff;
+    --accent-soft: #a78bfa;
+    --text-glow:   #bfeaff;
+    --glass-bg:    rgba(255, 255, 255, 0.045);
+    --glass-line:  rgba(255, 255, 255, 0.09);
+}
+
+letter-wide { letter-spacing: 0.08em; }
+
+/* ---------- Base ---------- */
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(ellipse 80% 55% at 15% -10%, rgba(59, 29, 110, 0.35), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 110%, rgba(14, 42, 92, 0.40), transparent 65%),
+        linear-gradient(180deg, var(--void) 0%, var(--void-2) 50%, var(--void) 100%);
+    background-attachment: fixed;
+    color: #dfe3f0;
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .navbar-brand, .btn {
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+
+/* ---------- Starfield backdrop ---------- */
+
+#starfield {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Faint nebula glows layered above the canvas */
+.nebula {
+    position: fixed;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.5;
+    pointer-events: none;
+}
+.nebula-top {
+    width: 45vw;   height: 45vw;
+    top:  -18vw;   left: -10vw;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.16), transparent 70%);
+}
+.nebula-bottom {
+    width: 50vw;   height: 50vw;
+    bottom: -20vw; right: -12vw;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.12), transparent 70%);
+}
+
+/* ---------- Glass panels ---------- */
+
+.glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-line);
+    border-radius: 1.1rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.glass:hover {
+    transform: translateY(-4px);
+    border-color: rgba(126, 226, 255, 0.35);
+}
+
+/* ---------- Navbar ---------- */
+
+.glass-nav {
+    background: rgba(5, 6, 15, 0.65) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.navbar-brand .letter-wide { color: #f2f5ff; }
+.nav-link {
+    color: rgba(223, 227, 240, 0.75);
+}
+/* Match Bootstrap's .navbar-nav .nav-link.active specificity (0,3,0) so our
+   accent color wins — Bootstrap's default would resolve to near-black here. */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--text-glow);
+}
+.nav .btn-outline-glow.active {
+    background: var(--accent);
+    color: #06131c;
+    border-color: var(--accent);
+}
+.navbar-toggler {
+    line-height: 1;
+}
+/* data-bs-theme=dark gives us a light toggler icon on its own; keep it visible */
+.navbar-toggler { --bs-navbar-toggler-border-color: rgba(255,255,255,0.15); }
+
+/* ---------- Hero & headings ---------- */
+
+.hero {
+    min-height: calc(100vh - 60px);
+    padding: 9rem 0 4rem;
+}
+.page-hero {
+    padding: 9rem 0 2.5rem;
+}
+
+.hero-title {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 700;
+    color: #f2f5ff;
+    letter-spacing: -0.02em;
+}
+.hero-lede {
+    max-width: 42rem;
+}
+
+.gradient-text {
+    background: linear-gradient(92deg, var(--accent) 10%, var(--accent-soft) 60%, #f0abfc 110%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.eyebrow {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: rgba(223, 227, 240, 0.65);
+}
+.text-glow {
+    color: var(--text-glow);
+    text-shadow: 0 0 18px rgba(126, 226, 255, 0.55);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+    border-radius: 2rem;
+}
+.btn-glow,
+.btn-outline-glow {
+    background: linear-gradient(92deg, var(--accent), var(--accent-soft));
+    border: none;
+    color: #06131c;
+    font-weight: 600;
+}
+.btn-glow,
+.btn-outline-glow:hover,
+.btn-outline-glow.active,
+.btn-outline-glow:not(:disabled):not(.disabled):active {
+    filter: none;
+    background: linear-gradient(92deg, var(--accent), var(--accent-soft)) !important;
+    border: none !important;
+    color: #06131c !important;
+}
+.btn-glow:hover, .btn-outline-glow:hover {
+    filter: brightness(1.12);
+}
+.btn-ghost {
+    border: 1px solid rgba(126, 226, 255, 0.4);
+    color: var(--text-glow);
+    background: transparent;
+}
+.btn-ghost:hover {
+    background: rgba(126, 226, 255, 0.1);
+    border-color: var(--accent);
+    color: var(--text-glow);
+}
+
+/* ---------- Hero orbit animation ---------- */
+
+.orbit-wrap {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    opacity: 0.9;
+}
+.planet-core {
+    position: absolute;
+    inset: 42%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #8fd8ff, #3b6ea5 60%, #1c3a63);
+    box-shadow: 0 0 30px rgba(126, 226, 255, 0.35);
+}
+.orbit {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    animation: spin 14s linear infinite;
+}
+.orbit-2 { inset: -22px; animation-duration: 26s; animation-direction: reverse; }
+.moon {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(126, 226, 255, 0.8);
+}
+.moon-sm { width: 6px; height: 6px; background: var(--accent-soft); }
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- Icons, stats, misc ---------- */
+
+.icon { filter: drop-shadow(0 0 6px rgba(126, 226, 255, 0.35)); }
+
+.stat {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-line);
+}
+
+.form-input {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-line);
+    color: #eef1f8;
+}
+.form-input:focus {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(126, 226, 255, 0.15);
+}
+.form-input::placeholder { color: rgba(223, 227, 240, 0.35); }
+
+.glass-alert {
+    background: var(--glass-bg);
+    border: 1px solid rgba(126, 226, 255, 0.3);
+    border-radius: 1.1rem;
+    backdrop-filter: blur(14px);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.footer-link {
+    color: rgba(223, 227, 240, 0.55);
+    text-decoration: none;
+}
+.footer-link:hover { color: var(--text-glow); }
+
+/* Keep main content clear of the fixed navbar */
+.site-main { flex: 1 0 auto; }
+
+/* ---------- Motion preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .orbit, .orbit-2, .moon { animation: none; }
+    .glass, .glass:hover { transition: none; transform: none; }
+}
